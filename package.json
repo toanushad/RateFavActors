@@ -1,0 +1,24 @@
+{
+  "name": "rate-fav-actors",
+  "version": "1.0.0",
+  "description": "Rate your favourite actors",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "actors",
+    "rating"
+  ],
+  "author": "Anusha Devabhaktuni",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.15.0",
+    "cookie-parser": "^1.4.1",
+    "express": "^4.13.4",
+    "jsonwebtoken": "^6.2.0",
+    "method-override": "^2.3.5",
+    "mongoose": "^4.4.14",
+    "morgan": "^1.7.0"
+  }
+}
