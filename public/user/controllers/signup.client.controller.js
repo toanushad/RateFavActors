@@ -12,7 +12,12 @@
         signUpCtrl.signUp = signUp;
         signUpCtrl.resetForm = resetForm;
 
-        function signUp(){
+        function signUp(isValid){
+            // checking validation
+            if(! isValid){
+                alert("User validation error");
+                return;
+            }
 
             userMgr.signUp(signUpCtrl.user)
                 .then(successCallBack)
