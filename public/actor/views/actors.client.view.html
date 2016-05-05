@@ -1,0 +1,98 @@
+<div class="text-center addBtnContainer">
+    <button class="btn addBtn" data-ng-click="actorsCtrl.openModal()"><i class="fa fa-plus"></i></button>
+</div>
+<div class="container resultsContainer" data-ng-show="actorsCtrl.actors.length">
+    <div id="searchResults">
+        <div id="pageSizesSelect">
+            <label>Show <select name="pageSizes"
+                                data-ng-init="actorsCtrl.pagination.numPerPage = '10'"
+                                data-ng-model="actorsCtrl.pagination.numPerPage">
+                <option value="10" selected>10</option>
+                <option value="25">25</option>
+                <option value="50">50</option>
+                <option value="100">100</option>
+            </select> entries
+            </label>
+        </div>
+        <div id="filterInput">
+            <label>Search:<input type="text" data-ng-model="actorsCtrl.pagination.filterText"></label>
+        </div>
+        <table class="table row-border hover" width="100%">
+            <thead class="pointer">
+            <tr>
+                <th data-ng-click="actorsCtrl.pagination.sort = 'name'; actorsCtrl.pagination.reverseSort = !actorsCtrl.pagination.reverseSort">Actor Name</th>
+                <th class="text-center" data-ng-click="actorsCtrl.pagination.sort = 'orating'; actorsCtrl.pagination.reverseSort = !actorsCtrl.pagination.reverseSort">Overall Rating</th>
+                <th data-ng-click="actorsCtrl.pagination.sort = 'rating'; actorsCtrl.pagination.reverseSort = !actorsCtrl.pagination.reverseSort">Your Rating</th>
+                <th>Favorites</th>
+                <th>Details</th>
+            </tr>
+            </thead>
+            <tfoot class="pointer">
+            <tr>
+                <th data-ng-click="actorsCtrl.pagination.sort = 'name'; actorsCtrl.pagination.reverseSort = !actorsCtrl.pagination.reverseSort">Actor Name</th>
+                <th class="text-center" data-ng-click="actorsCtrl.pagination.sort = 'orating'; actorsCtrl.pagination.reverseSort = !actorsCtrl.pagination.reverseSort">Overall Rating</th>
+                <th data-ng-click="actorsCtrl.pagination.sort = 'rating'; actorsCtrl.pagination.reverseSort = !actorsCtrl.pagination.reverseSort">Your Rating</th>
+                <th>Favorites</th>
+                <th>Details</th>
+            </tr>
+            </tfoot>
+            <tbody>
+            <tr data-ng-repeat="actor in actorsCtrl.actors |
+                        filter:actorsCtrl.pagination.filterText |
+                        limitTo:actorsCtrl.pagination.numPerPage:(actorsCtrl.pagination.currentPage - 1) * actorsCtrl.pagination.numPerPage |
+                        orderBy: actorsCtrl.pagination.sort:actorsCtrl.pagination.reverseSort">
+                <td>{{actor.name}}</td>
+                <td class="text-center">4/5</td>
+                <td>
+                    <span data-ng-click="actorsCtrl.addRating($index, actor.userRating)">
+                        <uib-rating ng-model="actor.userRating" max="5"></uib-rating>
+                    </span>
+
+                </td>
+                <td>Add to favourite</td>
+                <td>{{actor.details}}</td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <uib-pagination
+            data-ng-model="actorsCtrl.pagination.currentPage"
+            total-items="actorsCtrl.actors.length"
+            max-size="actorsCtrl.pagination.maxSize"
+            boundary-links="true">
+    </uib-pagination>
+</div>
+<div data-ng-hide="actorsCtrl.actors.length" class="vlarge-vertical-top-margin text-center">
+    <h4>No Actors to show. Try again or Add one</h4>
+</div>
+
+<script type="text/ng-template" id="myModal.html">
+    <div class="modal-header">
+        <h3 class="modal-title">Add Actor</h3>
+    </div>
+    <div class="modal-body">
+        <div data-ng-hide="actorsCtrl.modal.$submitted && actorsCtrl.modal.$valid && actorsCtrl.saved">
+            <form role="form" name="actorsCtrl.modal" novalidate>
+                <div class="form-group" data-ng-class="{ 'has-error': actorsCtrl.modal.name.$invalid && (actorsCtrl.modal.name.$dirty || actorsCtrl.modal.$submitted) }">
+                    <label class="control-label">Actor Name</label>
+                    <input type="text" name="name" data-ng-model="actorsCtrl.newActor.name"
+                           placeholder="Enter actor name" class="form-control" autocomplete="off"
+                           required data-ng-minlength="2" >
+                    <div data-ng-messages="actorsCtrl.modal.name.$error" data-ng-if="actorsCtrl.modal.name.$dirty || actorsCtrl.modal.$submitted">
+                        <p class="help-block" data-ng-message="required">Name required</p>
+                        <p class="help-block" data-ng-message="minlength">Name must be at least 2 characters</p>
+                    </div>
+                </div>
+                <div class="form-group" data-ng-class="{'has-error': actorsCtrl.modal.description.$invalid && (actorsCtrl.modal.description.$dirty || actorsCtrl.modal.$submitted)}">
+                    <label class="control-label">Actor details</label>
+                 <textarea name="description" rows="5" class="form-control" placeholder="Enter Actor details"
+                           data-ng-model="actorsCtrl.newActor.details"></textarea>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-primary col-sm-4 col-sm-offset-2" type="submit" data-ng-click="actorsCtrl.addActor(actorsCtrl.modal.$valid)">Submit</button>
+                    <button class="btn btn-warning col-sm-4" type="button" data-ng-click="actorsCtrl.closeModal()">Cancel</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</script>
