@@ -41,7 +41,7 @@ exports.login = function(req, res, next){
             return res.status(500).json({err: 'Invalid username or password' });
         } else {
             var token = jwt.sign({user: user}, 'development', {
-                expiresInMinutes: 1440 // expires in 24 hours
+                expiresIn: 86000 // expires in 24 hours
             });
 
             res.status(200).json({
