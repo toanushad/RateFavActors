@@ -287,6 +287,9 @@ html, body, .container {
 .error{
     border: 1px solid red;
 }
+.error-text{
+    color: red;
+}
 @-webkit-keyframes spinner {
   from {
     -webkit-transform: rotate(0deg); }
