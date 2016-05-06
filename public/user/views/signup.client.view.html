@@ -6,16 +6,16 @@
     <form role="form" name="signUpCtrl.form" data-ng-submit="signUpCtrl.signUp(signUpCtrl.form.$valid)" novalidate>
         <div class="form-group">
             <div data-ng-messages="signUpCtrl.form.firstName.$error">
-                <p data-ng-message="minlength">FirstName should be at least 2 chars length</p>
+                <p data-ng-message="minlength" class="error-text">FirstName should be at least 2 chars length</p>
             </div>
             <div data-ng-messages="signUpCtrl.form.lastName.$error">
-                <p data-ng-message="minlength">LastName should be at least 2 chars length</p>
+                <p data-ng-message="minlength" class="error-text">LastName should be at least 2 chars length</p>
             </div>
             <div data-ng-messages="signUpCtrl.form.username.$error">
-                <p data-ng-message="minlength">UserName should be at least 6 chars length</p>
+                <p data-ng-message="minlength" class="error-text">UserName should be at least 6 chars length</p>
             </div>
             <div data-ng-messages="signUpCtrl.form.password.$error">
-                <p data-ng-message="minlength">Password should be at least 6 chars length</p>
+                <p data-ng-message="minlength" class="error-text">Password should be at least 6 chars length</p>
             </div>
         </div>
         <div class="form-group">
