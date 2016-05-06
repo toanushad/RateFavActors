@@ -15,7 +15,7 @@
         function signUp(isValid){
             // checking validation
             if(! isValid){
-                alert("User validation error");
+               // alert("User validation error");
                 return;
             }
 
