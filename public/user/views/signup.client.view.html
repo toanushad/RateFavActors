@@ -5,18 +5,32 @@
     </div>
     <form role="form" name="signUpCtrl.form" data-ng-submit="signUpCtrl.signUp(signUpCtrl.form.$valid)" novalidate>
         <div class="form-group">
+            <div data-ng-messages="signUpCtrl.form.firstName.$error">
+                <p data-ng-message="minlength">FirstName should be at least 2 chars length</p>
+            </div>
+            <div data-ng-messages="signUpCtrl.form.lastName.$error">
+                <p data-ng-message="minlength">LastName should be at least 2 chars length</p>
+            </div>
+            <div data-ng-messages="signUpCtrl.form.username.$error">
+                <p data-ng-message="minlength">UserName should be at least 6 chars length</p>
+            </div>
+            <div data-ng-messages="signUpCtrl.form.password.$error">
+                <p data-ng-message="minlength">Password should be at least 6 chars length</p>
+            </div>
+        </div>
+        <div class="form-group">
             <input type="text" name="firstName" data-ng-model="signUpCtrl.user.firstName"
                    placeholder="Enter first name" class="form-control" autocomplete="off"
-                   required data-ng-minlength="2" >
+                   required data-ng-minlength="2" data-ng-class="{ 'error': signUpCtrl.form.firstName.$invalid && (signUpCtrl.form.firstName.$dirty || signUpCtrl.form.$submitted) }">
             <input type="text" name="lastName" data-ng-model="signUpCtrl.user.lastName"
                    placeholder="Enter last name" class="form-control" autocomplete="off"
-                   required data-ng-minlength="2" >
+                   required data-ng-minlength="2" data-ng-class="{ 'error': signUpCtrl.form.lastName.$invalid && (signUpCtrl.form.lastName.$dirty || signUpCtrl.form.$submitted) }">
             <input type="text" name="username" data-ng-model="signUpCtrl.user.username"
                    placeholder="Enter username" class="form-control" autocomplete="off"
-                   required data-ng-minlength="6" >
+                   required data-ng-minlength="6" data-ng-class="{ 'error': signUpCtrl.form.username.$invalid && (signUpCtrl.form.username.$dirty || signUpCtrl.form.$submitted) }">
             <input type="password" name="password" data-ng-model="signUpCtrl.user.password"
                    placeholder="Enter password" class="form-control" autocomplete="off"
-                   required data-ng-minlength="6" >
+                   required data-ng-minlength="6" data-ng-class="{ 'error': signUpCtrl.form.password.$invalid && (signUpCtrl.form.password.$dirty || signUpCtrl.form.$submitted) }">
         </div>
         <div class="form-group row">
             <div class="col-xs-6">
